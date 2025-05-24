@@ -2,158 +2,28 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="icon"
       href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐸</text></svg>"
     />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tom - Frog Clicker!</title>
-    <link rel="stylesheet" href="styles.css" />
+    <title>pkmn</title>
   </head>
   <body>
-    <header>
-      <div id="scoreboard">Score: 0</div>
-      <button id="settings-button">Settings</button>
-    </header>
-
-    <main>
-      <h1>Click The Emoji!</h1>
-    </main>
-
-    <div id="game-area"></div>
-
-    <div id="settings-modal" class="modal">
-      <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2>Settings</h2>
-        <label for="emoji-select">Choose Emoji:</label>
-        <select id="emoji-select">
-          <option value="🐸">🐸 Frog</option>
-          <option value="🩲">🩲 Underwear</option>
-          <option value="💩">💩 Poop emoji</option>
-          <option value="👹">👹 Ogre mask</option>
-          <option value="🦄">🦄 Unicorn</option>
-        </select>
-        <br /><br />
-        <label for="spawn-speed">Spawn Speed (ms):</label>
-        <input type="range" id="spawn-speed" min="50" max="1000" value="200" />
-        <span id="spawn-speed-value">200</span>
-        <br /><br />
-        <label for="max-emojis">Max Emojis on Screen:</label>
-        <input type="range" id="max-emojis" min="1" max="200" value="10" />
-        <span id="max-emojis-value">10</span>
-        <br /><br />
-        <label for="emoji-size">Emoji Size (px):</label>
-        <input type="range" id="emoji-size" min="20" max="80" value="40" />
-        <span id="emoji-size-value">40</span>
-      </div>
-    </div>
-
-    <script>
-      const gameArea = document.getElementById("game-area");
-      const scoreboard = document.getElementById("scoreboard");
-      const settingsButton = document.getElementById("settings-button");
-      const settingsModal = document.getElementById("settings-modal");
-      const closeButton = document.querySelector(".close-button");
-      const emojiSelect = document.getElementById("emoji-select");
-      const spawnSpeedInput = document.getElementById("spawn-speed");
-      const spawnSpeedValue = document.getElementById("spawn-speed-value");
-      const maxEmojisInput = document.getElementById("max-emojis");
-      const maxEmojisValue = document.getElementById("max-emojis-value");
-      const emojiSizeInput = document.getElementById("emoji-size"); // New
-      const emojiSizeValue = document.getElementById("emoji-size-value"); // New
-
-      let score = 0;
-      let currentEmoji = emojiSelect.value;
-      let spawnInterval = 400;
-      let maxEmojis = 10;
-      let currentEmojiSize = 40;
-      let spawnTimer;
-
-      function updateScore() {
-        scoreboard.textContent = `Score: ${score}`;
-      }
-
-      function spawnTarget() {
-        const currentEmojis = gameArea.querySelectorAll(".target");
-
-        if (currentEmojis.length >= maxEmojis) {
-          const oldestEmoji = gameArea.querySelector(".target");
-          if (oldestEmoji) {
-            oldestEmoji.remove();
-          } else {
-            return;
-          }
-        }
-
-        const target = document.createElement("div");
-        target.classList.add("target");
-        target.textContent = currentEmoji;
-        target.style.fontSize = `${currentEmojiSize}px`;
-        const size = currentEmojiSize;
-
-        const gameAreaRect = gameArea.getBoundingClientRect();
-        const gameAreaWidth = gameAreaRect.width;
-        const gameAreaHeight = gameAreaRect.height;
-
-        const x = Math.random() * (gameAreaWidth - size);
-        const y = Math.random() * (gameAreaHeight - size);
-
-        target.style.left = `${x}px`;
-        target.style.top = `${y}px`;
-
-        target.addEventListener("click", () => {
-          score++;
-          updateScore();
-          target.remove();
-        });
-
-        gameArea.appendChild(target);
-      }
-
-      function startGame() {
-        if (spawnTimer) {
-          clearInterval(spawnTimer);
-        }
-        spawnTimer = setInterval(spawnTarget, spawnInterval);
-      }
-
-      settingsButton.addEventListener("click", () => {
-        settingsModal.style.display = "block";
-      });
-
-      closeButton.addEventListener("click", () => {
-        settingsModal.style.display = "none";
-      });
-
-      window.addEventListener("click", (event) => {
-        if (event.target == settingsModal) {
-          settingsModal.style.display = "none";
-        }
-      });
-
-      emojiSelect.addEventListener("change", (event) => {
-        currentEmoji = event.target.value;
-      });
-
-      spawnSpeedInput.addEventListener("input", (event) => {
-        spawnInterval = parseInt(event.target.value);
-        spawnSpeedValue.textContent = spawnInterval;
-        startGame();
-      });
-
-      maxEmojisInput.addEventListener("input", (event) => {
-        maxEmojis = parseInt(event.target.value);
-        maxEmojisValue.textContent = maxEmojis;
-      });
-
-      emojiSizeInput.addEventListener("input", (event) => {
-        currentEmojiSize = parseInt(event.target.value);
-        emojiSizeValue.textContent = currentEmojiSize;
-      });
-
-      updateScore();
-      startGame();
-    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
