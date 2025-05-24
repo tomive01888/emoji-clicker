@@ -29,6 +29,7 @@ main {
     z-index: 1;
     user-select: none;
     color: white;
+    pointer-events: none;
 }
 
 h1 {
