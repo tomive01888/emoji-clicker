@@ -55,7 +55,6 @@ function SettingsModal({
           <option value="😺">😺 Cat</option>
           <option value="🩲">🩲 Briefs</option>
           <option value="🍙">🍙 Onigiri</option>
-          <option value="🩲">🩲 Briefs</option>
         </select>
 
         <br />
